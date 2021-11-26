@@ -1,5 +1,6 @@
 import express from 'express';
-import connectDB from  './config/db.js';
+import connectDB from './config/db.js';
+import authRoutes from './routes/authRoutes.js'
 
 const PORT = 5000 || process.env;
 const app = express();
@@ -9,11 +10,10 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
 //MongoDB Connection
-connectDB().then(() => console.log('MongoDB connected...'))
+connectDB().then(() => console.log('MongoDB connected...'));
 
-app.use((req, res) => {
-	res.send('Hello World');
-});
+//Routes
+app.use('/api', authRoutes);
 
 app.listen(PORT, () => {
 	console.log(`Server listening on port ${PORT}`);
