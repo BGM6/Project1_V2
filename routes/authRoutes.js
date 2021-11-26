@@ -6,7 +6,6 @@ import dotenv from 'dotenv';
 dotenv.config();
 const router = express.Router();
 
-//Register user route
 router.route('/register')
 	.post(
 		check('name', 'Name is required.')
