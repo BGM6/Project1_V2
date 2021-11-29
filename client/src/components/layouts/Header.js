@@ -1,19 +1,36 @@
-import React, {Fragment} from 'react';
-import {Container, Nav, Navbar, NavDropdown} from 'react-bootstrap';
+import React, {Fragment, useState} from 'react';
+import {Link} from 'react-router-dom';
+import {Container, Nav, Navbar} from 'react-bootstrap';
+
+import classes from './Header.module.css';
 
 const Header = () => {
+	const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+	const guessLinks = (
+		<div className={classes.links}>
+			<Nav.Link href="/api/calculate">Calculate</Nav.Link>
+			<Nav.Link href="/api/register">Register</Nav.Link>
+			<Nav.Link href="/api/login">Login</Nav.Link>
+		</div>
+	);
+
+	const authLinks = (
+		<div className={classes.links}>
+			<Nav.Link href="/api/calculate">Calculate</Nav.Link>
+			<Nav.Link href="/api/saved">Saved</Nav.Link>
+			<Nav.Link href="api/logout">Logout</Nav.Link>
+		</div>
+	);
 	return (
 		<Fragment>
-			<Navbar bg="dark" variant="dark"   expand="lg">
+			<Navbar bg="dark" variant="dark" expand="lg">
 				<Container>
-					<Navbar.Brand href="#home">OVP</Navbar.Brand>
+					<Navbar.Brand>OVP</Navbar.Brand>
 					<Navbar.Toggle aria-controls="basic-navbar-nav"/>
 					<Navbar.Collapse id="basic-navbar-nav">
 						<Nav className="me-auto">
-							<Nav.Link href="#home">Calculate</Nav.Link>
-							<Nav.Link href="#link">Saved</Nav.Link>
-							<Nav.Link href="#link">Login</Nav.Link>
-							<Nav.Link href="#link">Sign Out</Nav.Link>
+							{isLoggedIn ? authLinks : guessLinks}
 						</Nav>
 					</Navbar.Collapse>
 				</Container>
