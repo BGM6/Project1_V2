@@ -23,7 +23,7 @@ const Login = () => {
 						Login
 					</Button>
 					<p>
-						Don't have an account? <Link to="/api/register">Register</Link>
+						Don't have an account? <Link to="/register">Register</Link>
 					</p>
 				</div>
 			</Form>

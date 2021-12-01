@@ -15,8 +15,8 @@ const App = () => {
 			<Header/>
 			<div className="container">
 				<Routes>
-					<Route path="/api/register" element={<Register/>}/>
-					<Route path="/api/login" element={<Login/>}/>
+					<Route path="/register" element={<Register/>}/>
+					<Route path="/login" element={<Login/>}/>
 				</Routes>
 			</div>
 		</Fragment>
