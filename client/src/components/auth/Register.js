@@ -1,10 +1,16 @@
 import React from 'react';
+import {Link, useNavigate} from 'react-router-dom';
+import {useSelector, useDispatch} from 'react-redux';
+import userSlice from '../../store/UserSlice';
 import {Form, Button} from 'react-bootstrap';
-import {Link} from 'react-router-dom';
-
 import classes from './Register.module.css';
 
 const Register = () => {
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+
+	const {isFetching, isSuccess, isError, errorMessage} = useSelector(state => state.user);
+
 	return (
 		<div>
 			<h1 className={classes.heading}>Register</h1>
