@@ -27,11 +27,12 @@ const Register = ({register, isAuthenticated}) => {
 			setPassword2('');
 		} else {
 			register({email, password});
-			setEmail('');
-			setPassword('');
-			setPassword2('');
 		}
 	};
+
+	const emailInputHandler = event => setEmail(event.target.value);
+	const passwordInputHandler = event => setPassword(event.target.value);
+	const password2InputHandler = event => setPassword2(event.target.value);
 
 	return (
 		<div>
@@ -43,7 +44,7 @@ const Register = ({register, isAuthenticated}) => {
 						name="email"
 						value={email}
 						type="email"
-						onChange={event => setEmail(event.target.value)}
+						onChange={emailInputHandler}
 						placeholder="Enter email"
 						required/>
 				</Form.Group>
@@ -54,7 +55,7 @@ const Register = ({register, isAuthenticated}) => {
 						name="password"
 						value={password}
 						type="password"
-						onChange={event => setPassword(event.target.value)}
+						onChange={passwordInputHandler}
 						placeholder="Password"
 						required/>
 				</Form.Group>
@@ -64,7 +65,7 @@ const Register = ({register, isAuthenticated}) => {
 						name="password2"
 						value={password2}
 						type="password"
-						onChange={event => setPassword2(event.target.value)}
+						onChange={password2InputHandler}
 						placeholder="Re-enter password"
 						required/>
 				</Form.Group>
