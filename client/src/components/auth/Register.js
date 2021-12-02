@@ -23,7 +23,6 @@ const Register = ({register, isAuthenticated}) => {
 		event.preventDefault();
 		if (password !== password2) {
 			alert('Password do not match.');
-			setEmail('');
 			setPassword('');
 			setPassword2('');
 		} else {
