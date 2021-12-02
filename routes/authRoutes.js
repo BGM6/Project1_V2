@@ -9,13 +9,7 @@ dotenv.config();
 const router = express.Router();
 
 router.route('/register')
-	.post(
-		check('name', 'Name is required.')
-			.not()
-			.isEmpty()
-			.trim()
-			.escape(),
-		check('email', 'Email is required.')
+	.post(check('email', 'Email is required.')
 			.isEmail()
 			.normalizeEmail(),
 		check('password', 'Password must be at least 6 characters long.')
