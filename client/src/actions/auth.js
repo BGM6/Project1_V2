@@ -9,6 +9,7 @@ import {
 	LOGIN_FAIL,
 	LOGOUT
 } from './types';
+import {setAlert} from './alert';
 
 //Register User
 export const register = ({email, password}) => async dispatch => {
@@ -26,9 +27,9 @@ export const register = ({email, password}) => async dispatch => {
 	} catch (err) {
 		const errors = err.response.data.errors;
 		if (errors) {
-			console.log(errors, 'ERROR IN USER REGISTER');
+			console.log(errors)
+			errors.forEach(error => dispatch(setAlert(error.msg, true)));
 			return;
-			// errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
 		}
 		dispatch({
 			types: REGISTER_FAIL

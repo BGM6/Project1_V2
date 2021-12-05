@@ -1,5 +1,5 @@
 import React, {Fragment, useEffect} from 'react';
-import {Route, Routes, Navigate, Link} from 'react-router-dom';
+import {Route, Routes} from 'react-router-dom';
 
 import Header from './components/layouts/Header';
 import Register from './components/auth/Register';
@@ -13,6 +13,8 @@ import setAuthToken from './utils/setAuthToken';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
+
+import Modal from './components/UI/Modal';
 
 const App = () => {
 	useEffect(() => {

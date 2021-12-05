@@ -4,14 +4,26 @@ import {Link, useNavigate} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {register} from '../../actions/auth';
 
+import Modal from '../UI/Modal';
+
 import {Form, Button} from 'react-bootstrap';
 import classes from './Register.module.css';
 
-const Register = ({register, isAuthenticated}) => {
+const Register = ({register, isAuthenticated, alert}) => {
 	const navigate = useNavigate();
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [password2, setPassword2] = useState('');
+	const [errorModal, setErrorModal] = useState(null);
+	const [userExists, setUserExists] = useState(null);
+
+	useEffect(() => {
+		if (alert.userExists) {
+			setUserExists({
+				title: 'Registration Error',
+			});
+		}
+	}, [alert]);
 
 	useEffect(() => {
 		if (isAuthenticated) {
@@ -22,12 +34,20 @@ const Register = ({register, isAuthenticated}) => {
 	const formSubmitHandler = event => {
 		event.preventDefault();
 		if (password !== password2) {
-			alert('Password do not match.');
-			setPassword('');
-			setPassword2('');
+			setErrorModal({
+				title: 'Registration failed.',
+				message: 'Passwords do not match. Please try again.'
+			});
+
 		} else {
 			register({email, password});
 		}
+	};
+
+	const errorHandler = () => {
+		setErrorModal(null);
+		setPassword('');
+		setPassword2('');
 	};
 
 	const emailInputHandler = event => setEmail(event.target.value);
@@ -36,6 +56,8 @@ const Register = ({register, isAuthenticated}) => {
 
 	return (
 		<div>
+			{errorModal && <Modal title={errorModal.title} message={errorModal.message} onConfirm={errorHandler}/>}
+			{userExists && <Modal title={userExists.title} message={alert.msg} onConfirm={() => setUserExists(null)}/>}
 			<h1 className={classes.heading}>Register</h1>
 			<Form onSubmit={formSubmitHandler} className={`${classes.form} ${classes.boxShadow}`}>
 				<Form.Group className="mb-3" controlId="formBasicEmail">
@@ -83,7 +105,8 @@ const Register = ({register, isAuthenticated}) => {
 };
 
 const mapStateToProps = state => ({
-	isAuthenticated: state.auth.isAuthenticated
+	isAuthenticated: state.auth.isAuthenticated,
+	alert: state.alert
 });
 
 export default connect(mapStateToProps, {register})(Register);
