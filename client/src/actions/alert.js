@@ -1,9 +1,10 @@
-import {SET_ALERT} from './types';
+import {SET_ALERT, REMOVE_ALERT} from './types';
 
-export const setAlert = (msg, userExists) => dispatch => {
+export const setAlert = (msg, timeout = 500) => dispatch => {
 	dispatch({
 		type: SET_ALERT,
-		payload: {msg, userExists}
+		payload: {msg}
 	});
+	setTimeout(() => dispatch({type: REMOVE_ALERT}), timeout);
 };
 

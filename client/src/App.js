@@ -14,15 +14,13 @@ import setAuthToken from './utils/setAuthToken';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 
-import Modal from './components/UI/Modal';
-
 const App = () => {
 	useEffect(() => {
 		if (localStorage.token) {
 			setAuthToken(localStorage.token);
 		}
 		store.dispatch(loadUser());
-	}, [localStorage.token]);
+	}, []);
 
 	return (
 		<Fragment>

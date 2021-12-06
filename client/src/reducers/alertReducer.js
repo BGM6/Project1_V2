@@ -1,10 +1,6 @@
-import {SET_ALERT} from '../actions/types';
+import {SET_ALERT, REMOVE_ALERT} from '../actions/types';
 
-const initialState = {
-	msg: '',
-	userExists: false,
-	id: null,
-};
+const initialState = {err: null};
 
 const alertReducer = (state = initialState, action) => {
 	const {type, payload} = action;
@@ -13,9 +9,10 @@ const alertReducer = (state = initialState, action) => {
 			return {
 				...state,
 				...payload,
-				msg: 'User already exists',
-				userExists: true
+				err: true
 			};
+		case REMOVE_ALERT:
+			return initialState;
 		default:
 			return state;
 	}

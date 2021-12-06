@@ -18,25 +18,26 @@ const Register = ({register, isAuthenticated, alert}) => {
 	const [userExists, setUserExists] = useState(null);
 
 	useEffect(() => {
-		if (alert.userExists) {
+		if (alert.err) {
 			setUserExists({
 				title: 'Registration Error',
+				message: 'Email already exists.'
 			});
 		}
-	}, [alert]);
+	}, [alert.err]);
 
 	useEffect(() => {
 		if (isAuthenticated) {
 			navigate('/calculate');
 		}
-	}, [isAuthenticated]);
+	}, [isAuthenticated, navigate]);
 
 	const formSubmitHandler = event => {
 		event.preventDefault();
 		if (password !== password2) {
 			setErrorModal({
-				title: 'Registration failed.',
-				message: 'Passwords do not match. Please try again.'
+				title: 'Registration Error',
+				message: 'Passwords do not match.'
 			});
 
 		} else {
@@ -50,6 +51,10 @@ const Register = ({register, isAuthenticated, alert}) => {
 		setPassword2('');
 	};
 
+	const userExistsHandler = () => {
+		setUserExists(null);
+	};
+
 	const emailInputHandler = event => setEmail(event.target.value);
 	const passwordInputHandler = event => setPassword(event.target.value);
 	const password2InputHandler = event => setPassword2(event.target.value);
@@ -57,7 +62,7 @@ const Register = ({register, isAuthenticated, alert}) => {
 	return (
 		<div>
 			{errorModal && <Modal title={errorModal.title} message={errorModal.message} onConfirm={errorHandler}/>}
-			{userExists && <Modal title={userExists.title} message={alert.msg} onConfirm={() => setUserExists(null)}/>}
+			{userExists && <Modal title={userExists.title} message={userExists.message} onConfirm={userExistsHandler}/>}
 			<h1 className={classes.heading}>Register</h1>
 			<Form onSubmit={formSubmitHandler} className={`${classes.form} ${classes.boxShadow}`}>
 				<Form.Group className="mb-3" controlId="formBasicEmail">
