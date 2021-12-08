@@ -4,8 +4,17 @@
     justify-content: center;
     text-align: center;
     height: 30vh;
-    color: #000;
+    color: #fff;
 }
 
-.main h1 {
+.card {
+    border-radius: 5px;
+    margin-top: 3rem;
+    padding: 1rem;
+}
+
+.btn {
+    border-radius: 5px;
+    color: #fff;
+    padding: 3px 8px;
 }

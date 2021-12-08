@@ -1,4 +1,5 @@
 import React, {Fragment} from 'react';
+import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {logout} from '../../actions/auth';
 
@@ -8,31 +9,34 @@ import classes from './Header.module.css';
 const Header = ({isAuthenticated, logout}) => {
 
 	const guessLinks = (
-		<div className={classes.links}>
-			<Nav.Link href="/calculate">Calculate</Nav.Link>
-			<Nav.Link href="/register">Register</Nav.Link>
-			<Nav.Link href="/login">Login</Nav.Link>
-		</div>
+		<Fragment>
+			<Nav.Link><Link to="/calculate">Calculate</Link></Nav.Link>
+			<Nav.Link><Link to="/register">Register</Link></Nav.Link>
+			<Nav.Link><Link to="/login">Login</Link></Nav.Link>
+		</Fragment>
 	);
 
 	const authLinks = (
-		<div className={classes.links}>
-			<Nav.Link href="/calculate">Calculate</Nav.Link>
-			<Nav.Link href="/saved">Saved</Nav.Link>
-			<Nav.Link href="/login" onClick={logout}>Logout</Nav.Link>
-		</div>
+		<Fragment>
+			<Nav.Link><Link to="/calculate">Calculate</Link></Nav.Link>
+			<Nav.Link><Link to="/saved">Saved</Link></Nav.Link>
+			<Nav.Link onClick={logout}> <Link to="/logout">Logout</Link></Nav.Link>
+		</Fragment>
 	);
 	return (
 		<Fragment>
-			<Navbar bg="dark" variant="dark" expand="lg">
-				<Container>
-					<Navbar.Brand>OVP</Navbar.Brand>
-					<Navbar.Toggle aria-controls="basic-navbar-nav"/>
-					<Navbar.Collapse id="basic-navbar-nav">
-						<Nav className="me-auto">
-							{isAuthenticated ? authLinks : guessLinks}
-						</Nav>
-					</Navbar.Collapse>
+			<Navbar bg="dark" variant="dark">
+				<Container className={classes.navContainer}>
+					<div>
+						<Navbar.Brand><Link to="/"><span style={{color: 'white'}}>OVP</span></Link></Navbar.Brand>
+					</div>
+					<div>
+						<Navbar.Collapse id="basic-navbar-nav">
+							<Nav className={`${classes.links}`}>
+								{isAuthenticated ? authLinks : guessLinks}
+							</Nav>
+						</Navbar.Collapse>
+					</div>
 				</Container>
 			</Navbar>
 		</Fragment>

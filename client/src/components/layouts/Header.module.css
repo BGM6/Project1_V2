@@ -11,3 +11,9 @@
     border-radius: 5px;
     padding: 0.5rem;
 }
+
+.navContainer {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}

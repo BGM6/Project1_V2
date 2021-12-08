@@ -72,7 +72,7 @@ const Login = ({isAuthenticated, login, alert}) => {
 						required/>
 				</Form.Group>
 				<div className={classes.actions}>
-					<Button variant="success" type="submit">
+					<Button variant="primary" type="submit">
 						Login
 					</Button>
 					<p>
