@@ -1,6 +1,7 @@
 import React, {Fragment, useEffect} from 'react';
 import {Route, Routes} from 'react-router-dom';
 
+import Landing from './components/pages/Landing';
 import Header from './components/layouts/Header';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
@@ -28,6 +29,7 @@ const App = () => {
 				<Header/>
 				<div className="container">
 					<Routes>
+						<Route path="/" element={<Landing/>}/>
 						<Route path="/register" element={<Register/>}/>
 						<Route path="/login" element={<Login/>}/>
 					</Routes>
